@@ -16,6 +16,8 @@ import com.ubs.ws.movies.pojo.dto.BaseCommentDTO;
 import com.ubs.ws.movies.pojo.dto.MovieDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DefaultMovieService implements MovieService {
@@ -23,7 +25,20 @@ public class DefaultMovieService implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
+    /*
+    If several POST requests pop-in in parallel, some kind of concurrency-control is required to prevent phantom-reads
+    when inserting a new movie. At this stage, we can enforce a full pessimistic locking at the JPA level with:
+
+                   @Transactional(isolation = Isolation.SERIALIZABLE)
+
+    so that all transactions will be executed in a sequence with no overlapping. The effect is very similar to using synchronized.
+
+    Actually this locking is an overkill; it can cause performance issues and could be NOT a production solution.
+
+    In a real production environment we would possibly leverage the native locking of an ACID database.
+     */
     @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void addMovie(MovieDTO movieDTO) throws DuplicateMovieIdException {
 
         /* CAVEAT
