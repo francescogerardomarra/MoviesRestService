@@ -15,6 +15,7 @@ import com.ubs.ws.movies.pojo.bean.Movie;
 import com.ubs.ws.movies.pojo.dto.BaseCommentDTO;
 import com.ubs.ws.movies.pojo.dto.MovieDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,6 +78,7 @@ public class DefaultMovieService implements MovieService {
     }
 
     @Override
+    @Cacheable(value = "movies", key = "#movieId")
     public MovieDTO getMovieById(long movieId) throws ResourceNotFoundException {
         Movie movie = movieRepository.findOne(movieId);
 

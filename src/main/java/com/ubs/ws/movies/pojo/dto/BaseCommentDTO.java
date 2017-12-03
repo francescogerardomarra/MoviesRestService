@@ -1,9 +1,10 @@
 package com.ubs.ws.movies.pojo.dto;
 
+import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class BaseCommentDTO {
+public class BaseCommentDTO implements Serializable {
 
     @NotNull
     @Size(min=1)

@@ -1,10 +1,11 @@
 package com.ubs.ws.movies.pojo.dto;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class MovieDTO {
+public class MovieDTO implements Serializable {
 
     @NotNull
     private Long movieId;
