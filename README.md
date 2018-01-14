@@ -9,7 +9,9 @@ A RESTful facade backend API with two services:
 ## Toolset
 - Spring Boot
 - Spring MVC
-- Spring Data JPA (out-of-the-box DAOs generations at runtime via method-naming conventions, declarative transaction-boundaries control)
+- Spring Data JPA
+  * out-of-the-box DAO-generation at runtime via method-naming conventions
+  * declarative transaction-boundaries control
 - Hibernate
 - Spring Security
 - Apache Derby
