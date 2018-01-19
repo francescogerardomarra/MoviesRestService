@@ -13,6 +13,8 @@ A RESTful facade backend API with two services:
   * out-of-the-box DAO-generation at runtime via method-naming conventions
   * declarative transaction-boundaries control
 - Hibernate
+- Jackson Annotations
+  * custom serialization of references (@JsonIdentityInfo, @JsonIdentityReference)
 - Spring Security
 - Apache Derby
 - EhCache
